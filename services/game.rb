@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative 'helpers/input_helper'
-
 class Game
   include InputHelper
 
@@ -30,8 +28,8 @@ class Game
   def start
     while @game_state == PLAY_MODE[:PLAYING]
       print_grid
-      x = get_valid_input("Enter X").to_i
-      y = get_valid_input("Enter Y").to_i
+      x = get_valid_integer_input("Enter X").to_i
+      y = get_valid_integer_input("Enter Y").to_i
 
       if within_bounds?(x, y)
         reveal_cell(x, y)
@@ -143,10 +141,6 @@ class Game
     end
   end
 
-  def print_message(message)
-    puts message
-  end
-
   def print_grid
     @grid.each do |row|
       row.each do |cell|
@@ -164,20 +158,3 @@ class Game
     end
   end
 end
-
-class Controller
-  include InputHelper
-
-  def init_game
-    width = get_valid_input("Enter the width of the grid: ", min_value: MIN_WIDTH).to_i
-    height = get_valid_input("Enter the height of the grid: ", min_value: MIN_HEIGHT).to_i
-    max_holes = (width * height) - MIN_HOLES_TO_GRID_GAP
-    holes_count = get_valid_input("Enter the number of holes: ", min_value: 1, max_value: max_holes).to_i
-
-    game = Game.new(width, height, holes_count)
-    game.start
-  end
-end
-
-controller = Controller.new
-controller.init_game

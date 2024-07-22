@@ -14,7 +14,7 @@ module InputHelper
     end
   end
 
-  def get_valid_input(prompt, min_value: 0, max_value: nil)
+  def get_valid_integer_input(prompt, min_value: 0, max_value: nil)
     loop do
       print_message(prompt)
       input = gets.chomp
