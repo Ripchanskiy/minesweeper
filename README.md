@@ -10,7 +10,3 @@ ruby play.rb
 ```shell
 bundle exec rspec
 ```
-
-### TODO:
-- ADD more specs(game block)
-- configure rubocop
