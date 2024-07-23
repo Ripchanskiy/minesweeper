@@ -47,4 +47,19 @@ RSpec.describe TestInputHelper do
       end
     end
   end
+
+  describe '#print_grid' do
+    let(:grid) do
+      [
+        [{ revealed: false, has_hole: false, touching_holes: 1 },
+         { revealed: true, has_hole: false, touching_holes: 1 }],
+        [{ revealed: true, has_hole: true, touching_holes: 0 }, { revealed: false, has_hole: false, touching_holes: 0 }]
+      ]
+    end
+
+    it 'prints the grid correctly' do
+      expected_output = ". 1 \nH . \n"
+      expect { subject.print_grid(grid) }.to output(expected_output).to_stdout
+    end
+  end
 end

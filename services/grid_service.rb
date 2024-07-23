@@ -3,7 +3,7 @@
 class GridService
   include Constants::Grid
 
-  attr_reader :grid
+  attr_reader :grid, :hole_positions
 
   def initialize(height, width, holes_count)
     @height = height
