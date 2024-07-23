@@ -3,8 +3,8 @@
 source 'https://rubygems.org'
 
 group :development do
-  gem "rubocop", '~> 1.65'
-  gem "pry", '~> 0.14'
+  gem 'pry', '~> 0.14'
+  gem 'rubocop', '~> 1.65'
 end
 
 group :test do

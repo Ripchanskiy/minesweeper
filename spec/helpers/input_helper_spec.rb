@@ -43,7 +43,7 @@ RSpec.describe TestInputHelper do
     describe '#get_valid_input' do
       it 'prompts the user for input and returns a valid integer' do
         allow(subject).to receive(:gets).and_return("5\n")
-        expect(subject.get_valid_integer_input("Enter a number", min_value: 1)).to eq(5)
+        expect(subject.get_valid_integer_input('Enter a number', min_value: 1)).to eq(5)
       end
     end
   end

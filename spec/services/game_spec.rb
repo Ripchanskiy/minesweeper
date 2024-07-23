@@ -10,7 +10,9 @@ RSpec.describe Game do
 
   describe '#initialize' do
     it 'validates grid parameters' do
-      expect { Game.new(5, 5, -1) }.to raise_error(ArgumentError, "All parameters must be valid integers and greater than 0")
+      expect do
+        Game.new(5, 5, -1)
+      end.to raise_error(ArgumentError, 'All parameters must be valid integers and greater than 0')
     end
   end
 end

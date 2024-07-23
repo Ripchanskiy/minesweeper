@@ -7,10 +7,10 @@ SimpleCov.formatter = SimpleCov::Formatter::HTMLFormatter
 SimpleCov.start do
   filters.clear
 
-  add_filter %w[ /spec]
+  add_filter %w[/spec]
 
-  add_group "Services", "services"
-  add_group "Helpers", "helpers"
+  add_group 'Services', 'services'
+  add_group 'Helpers', 'helpers'
 
   at_exit do
     SimpleCov.result.format!

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'pry'
-require_relative "support/config/simplecov"
+require_relative 'support/config/simplecov'
 require_relative '../boot'
 
 RSpec.configure do |config|
