@@ -70,7 +70,7 @@ class GridService
   end
 
   def reveal_surrounding_cells(x, y)
-    DIRECTIONS.each do |dx, dy|
+    DIRECTIONS.each do |dy, dx|
       # For each direction, the `coordinates of the neighboring cell` (ny, nx) are calculated
       # by adding the offsets `dy` and `dx` to the current cell coordinates (y, x)
       nx = x + dx
