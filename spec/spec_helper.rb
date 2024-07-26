@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require 'pry'
 require_relative 'support/config/simplecov'
+require_relative 'shared_examples/strategy_shared_examples'
 require_relative '../boot'
 
 RSpec.configure do |config|

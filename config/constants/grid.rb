@@ -7,7 +7,7 @@ module Constants
       already_revealed: :already_revealed,
       has_hole: :has_hole,
       all_revealed: :all_revealed,
-      continue: :continue
+      revealed: :revealed
     }.freeze
 
     MIN_WIDTH = 5

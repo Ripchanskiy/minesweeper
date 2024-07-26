@@ -18,24 +18,28 @@ class GridService
     place_holes
   end
 
-  def reveal_cell(x, y) # rubocop:disable Metrics/AbcSize
-    return REVEAL_STATUSES[:within_bounds] unless within_bounds?(x, y)
+  def reveal_cell(x, y)
+    raise NotImplementedError, 'This method should be implemented by the strategy classes'
+  end
 
-    cell = @grid[y][x]
-    if cell[:revealed]
-      REVEAL_STATUSES[:already_revealed]
-    elsif cell[:has_hole]
-      reveal_all_holes
-      REVEAL_STATUSES[:has_hole]
-    else
-      cell[:revealed] = true
-      @revealed_cells_count += 1
-      return REVEAL_STATUSES[:all_revealed] if all_cells_revealed?
+  # Check if cell (x, y) is within the grid boundaries
+  def within_bounds?(x, y)
+    x.between?(0, @width - 1) && y.between?(0, @height - 1)
+  end
 
-      # Recursively reveal all neighboring cells if cell doesn't have touching_holes
-      reveal_surrounding_cells(x, y) if cell[:touching_holes].zero?
-      REVEAL_STATUSES[:revealed]
+  def all_cells_revealed?
+    @revealed_cells_count == @cells_without_holes_count
+  end
+
+  def reveal_all_holes
+    @hole_positions.each do |y, x|
+      @grid[y][x][:revealed] = true
     end
+  end
+
+  def on_reveal(cell)
+    cell[:revealed] = true
+    @revealed_cells_count += 1
   end
 
   private
@@ -59,21 +63,6 @@ class GridService
     end
   end
 
-  def all_cells_revealed?
-    @revealed_cells_count == @cells_without_holes_count
-  end
-
-  def reveal_all_holes
-    @hole_positions.each do |y, x|
-      @grid[y][x][:revealed] = true
-    end
-  end
-
-  def on_reveal(cell)
-    cell[:revealed] = true
-    @revealed_cells_count += 1
-  end
-
   def update_surrounding_holes(x, y)
     DIRECTIONS.each do |dy, dx|
       # For each direction, the `coordinates of the neighboring cell` (ny, nx) are calculated
@@ -86,11 +75,6 @@ class GridService
         @grid[ny][nx][:touching_holes] += 1
       end
     end
-  end
-
-  # Check if cell (x, y) is within the grid boundaries
-  def within_bounds?(x, y)
-    x.between?(0, @width - 1) && y.between?(0, @height - 1)
   end
 
   def validate_grid_params

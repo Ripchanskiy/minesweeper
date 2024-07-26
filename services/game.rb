@@ -6,13 +6,14 @@ class Game
 
   PLAY_MODE = { PLAYING: 0, LOST: 1, WON: 2 }.freeze
 
-  def initialize(width, height, holes_count, strategy)
+  def initialize(width, height, holes_count, strategy_class)
     @width = width.to_i
     @height = height.to_i
     @holes_count = holes_count.to_i
     @game_state = PLAY_MODE[:PLAYING]
     @cells_without_holes_count = (width * height) - holes_count
-    @grid_service = strategy.new(@height, @width, @holes_count)
+    @grid_service = GridService.new(@height, @width, @holes_count)
+    @strategy = strategy_class.new(@grid_service)
   end
 
   def start
@@ -20,7 +21,7 @@ class Game
       x = get_valid_integer_input('Enter X').to_i
       y = get_valid_integer_input('Enter Y').to_i
 
-      status = @grid_service.reveal_cell(x, y)
+      status = @strategy.reveal_cell(x, y)
       handle_status(status)
       print_grid(@grid_service.grid)
     end
