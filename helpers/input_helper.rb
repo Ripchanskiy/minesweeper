@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
+require_relative 'output_helper'
+
 module InputHelper
+  include OutputHelper
   def validate_integer?(value, min_value, max_value = nil)
     if value.match?(/^\d+$/)
       int_value = value.to_i
@@ -18,27 +21,6 @@ module InputHelper
 
       range_message = max_value ? "and <= #{max_value}" : ''
       print_message("Value should be a valid integer >= #{min_value} #{range_message}")
-    end
-  end
-
-  def print_message(message)
-    puts message
-  end
-
-  def print_grid(grid)
-    grid.each do |row|
-      row.each do |cell|
-        if cell[:revealed]
-          if cell[:has_hole]
-            print 'H '
-          else
-            print "#{cell[:touching_holes]} "
-          end
-        else
-          print '. '
-        end
-      end
-      puts
     end
   end
 end
