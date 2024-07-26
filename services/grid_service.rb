@@ -69,19 +69,9 @@ class GridService
     end
   end
 
-  def reveal_surrounding_cells(x, y)
-    DIRECTIONS.each do |dy, dx|
-      # For each direction, the `coordinates of the neighboring cell` (ny, nx) are calculated
-      # by adding the offsets `dy` and `dx` to the current cell coordinates (y, x)
-      nx = x + dx
-      ny = y + dy
-      # Ensure the neighboring cell (nx, ny) is within the grid boundaries and doesn't have a hole
-      next unless within_bounds?(nx, ny)
-
-      next_cell = @grid[ny][nx]
-      # Ignore holes and already revealed cells
-      reveal_cell(nx, ny) unless next_cell[:revealed] || next_cell[:has_hole]
-    end
+  def on_reveal(cell)
+    cell[:revealed] = true
+    @revealed_cells_count += 1
   end
 
   def update_surrounding_holes(x, y)

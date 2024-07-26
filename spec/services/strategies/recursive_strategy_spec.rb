@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require_relative '../spec_helper'
+require_relative '../../spec_helper'
 
-RSpec.describe GridService do
+RSpec.describe RecursiveStrategy do
   let(:height) { 5 }
   let(:width) { 5 }
   let(:holes_count) { 3 }

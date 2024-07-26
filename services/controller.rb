@@ -10,7 +10,16 @@ class Controller
     max_holes = (width * height) - MIN_HOLES_TO_GRID_GAP
     holes_count = get_valid_integer_input('Enter the number of holes: ', min_value: 1, max_value: max_holes).to_i
 
-    game = Game.new(width, height, holes_count)
+    strategy = choose_strategy
+    game = Game.new(width, height, holes_count, strategy)
     game.start
+  end
+
+  private
+
+  def choose_strategy
+    strategy_choice = get_valid_integer_input('Choose strategy: 1 for Recursive, 2 for Iterative', min_value: 1,
+                                                                                                   max_value: 2)
+    strategy_choice == 1 ? RecursiveStrategy : IterativeStrategy
   end
 end

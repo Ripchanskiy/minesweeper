@@ -6,12 +6,12 @@ RSpec.describe Game do
   let(:width) { 5 }
   let(:height) { 5 }
   let(:holes_count) { 3 }
-  subject(:game) { Game.new(width, height, holes_count) }
+  subject(:game) { Game.new(width, height, holes_count, RecursiveStrategy) }
 
   describe '#initialize' do
     it 'validates grid parameters' do
       expect do
-        Game.new(5, 5, -1)
+        Game.new(5, 5, -1, RecursiveStrategy)
       end.to raise_error(ArgumentError, 'All parameters must be valid integers and greater than 0')
     end
   end

@@ -15,6 +15,9 @@ RSpec.describe Controller do
     allow(controller).to receive(:get_valid_integer_input)
       .with('Enter the number of holes: ', min_value: 1, max_value: 75)
       .and_return('15')
+    allow(controller).to receive(:get_valid_integer_input)
+      .with('Choose strategy: 1 for Recursive, 2 for Iterative', min_value: 1, max_value: 2)
+      .and_return(1)
   end
 
   describe '#init_game' do
@@ -28,8 +31,11 @@ RSpec.describe Controller do
       expect(controller).to receive(:get_valid_integer_input)
         .with('Enter the number of holes: ', min_value: 1, max_value: 95)
         .and_return('15')
+      expect(controller).to receive(:get_valid_integer_input)
+        .with('Choose strategy: 1 for Recursive, 2 for Iterative', min_value: 1, max_value: 2)
+        .and_return(1)
 
-      expect(Game).to receive(:new).with(10, 10, 15).and_call_original
+      expect(Game).to receive(:new).with(10, 10, 15, RecursiveStrategy).and_call_original
       expect_any_instance_of(Game).to receive(:start)
 
       controller.init_game
